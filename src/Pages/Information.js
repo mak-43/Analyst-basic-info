@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../Components/Loading';
 import InfoCard from './InfoCard';
 import './Information.css'
 
@@ -6,10 +7,18 @@ const Information = () => {
 
     const [info, setInfo] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
-        fetch('https://swapi.dev/api/people').then(res => res.json()).then(data => setInfo(data.results))
+        setLoading(true)
+        fetch('https://swapi.dev/api/people').then(res => res.json()).then(data => {
+            setInfo(data.results)
+            setLoading(false)
+        })
     }, [])
 
+    if (loading) {
+        return <Loading />
+    }
 
     return (
         <div className='bg-slate-100 pt-5'>

@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../Components/Loading';
 
 const HomeWorld = ({api}) => {
     const [home, setHome] = useState({})
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
+        setLoading(true)
         fetch(api)
         .then(res=>res.json())
-        .then(data=>setHome(data))
+        .then(data=>{setHome(data)
+            setLoading(false)
+        })
     }, [api])
 
+    if(loading){
+        return <Loading/>
+    }
     return (
         <div>
             <p>name: {home?.name}</p>
