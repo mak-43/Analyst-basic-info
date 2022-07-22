@@ -10,7 +10,7 @@ const InfoCard = ({ data }) => {
     return (
         <div className='mx-auto w-full lg:px-10 md:px-5 ' >
             <div className=' px-5  ms-0 items-center text-left border border-neutral-400 rounded-xl py-10 bg-white'>
-                <div className='grid grid-cols-5 items-center'>
+                <div className='grid md:grid-cols-5 sm:grid-cols-1 justify-center items-center'>
                     <div>{name}</div>
                     <div>
                         <h2 className=' font-bold'>Height</h2>
