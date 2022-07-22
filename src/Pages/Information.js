@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import InfoCard from './InfoCard';
+import './Information.css'
 
 const Information = () => {
 
     const [info, setInfo] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
     useEffect(() => {
         fetch('https://swapi.dev/api/people').then(res => res.json()).then(data => setInfo(data.results))
     }, [])
 
-    console.log(info)
+
     return (
         <div className='bg-slate-100 pt-5'>
             <div className='grid grid-cols-1 gap-5'>
@@ -21,11 +23,14 @@ const Information = () => {
             </div>
 
 
-            <div class="btn-group flex justify-center my-5">
-                <button class="btn">«</button>
-                
-                <button class="btn">Page 22</button>
-                <button class="btn">»</button>
+
+            <div class="pagination text-center  flex justify-center py-5">
+                {
+                    [...Array(info?.length).keys()].map(number => <button
+                        onClick={() => setCurrentPage(number + 1)}
+                        className={currentPage == number + 1 ? 'selected px-2 rounded' : 'px-2 rounded'}
+                    >{number + 1}</button>)
+                }
             </div>
         </div>
     );
